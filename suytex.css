@@ -1,199 +1,92 @@
-/* ============================================================
-   SUYTEX DESIGN SYSTEM — suytex.css  v1.0.0
-   Tokens · Tailwind utilities · Signature classes
-   ============================================================ */
+/* ============================================================================
+   SUYTEX · SISTEMA DE DISEÑO — fuente única de verdad
+   Lujo minimalista · tech educativo premium
+   ----------------------------------------------------------------------------
+   USO TAILWIND v4 (Yobel/Halving/Talvo):
+     npm i github:Suytex/suytex-design
+     en tu CSS de entrada:  @import "tailwindcss"; @import "suytex-design/suytex.css";
+   USO VANILLA (landings GitHub Pages, sin build):
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Suytex/suytex-design@main/suytex.css">
+     usa var(--su-*) + las clases .su-*
+   ============================================================================ */
 
-/* ── 1. TOKENS ──────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+
+@theme {
+  --color-brand:     #0A0E27;
+  --color-ink:       #060B1A;
+  --color-blue:      #2563EB;
+  --color-electric:  #1D4ED8;
+  --color-royal:     #1E3A8A;
+  --color-highlight: #93C5FD;
+  --color-white:     #FFFFFF;
+  --color-mist:      #94A3B8;
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body:    "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --tracking-title:   0.04em;
+  --tracking-wide:    0.20em;
+  --tracking-caption: 0.30em;
+  --tracking-max:     0.40em;
+
+  --radius-suytex: 4px;
+}
+
 :root {
-  /* Color */
-  --su-brand:      #0A0A0F;        /* near-black, the canvas */
-  --su-ink:        #111117;        /* deep ink, text/bg */
-  --su-blue:       #3D6FFF;        /* accent — never fill */
-  --su-highlight:  #C8FF00;        /* electric lime, punch */
-  --su-mist:       rgba(255,255,255,0.10); /* subtle separator */
-  --su-white:      #FFFFFF;
-  --su-gray-50:    #F5F5F7;
-  --su-gray-400:   #8E8E99;
-  --su-gray-600:   #3A3A46;
+  --su-brand:     #0A0E27;
+  --su-ink:       #060B1A;
+  --su-blue:      #2563EB;
+  --su-electric:  #1D4ED8;
+  --su-royal:     #1E3A8A;
+  --su-highlight: #93C5FD;
+  --su-white:     #FFFFFF;
+  --su-mist:      #94A3B8;
 
-  /* Gradient — the one gesture */
-  --su-gradient:   linear-gradient(135deg, #3D6FFF 0%, #C8FF00 100%);
+  --su-font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --su-font-body:    "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* Typography */
-  --su-font-display: "Inter", "SF Pro Display", system-ui, sans-serif;
-  --su-font-body:    "Inter", "SF Pro Text", system-ui, sans-serif;
+  --su-gradient: linear-gradient(135deg, #93C5FD 0%, #2563EB 100%);
 
-  /* Tracking */
-  --su-tracking-title:  -0.03em;
-  --su-tracking-snug:   -0.02em;
-  --su-tracking-normal:  0em;
-  --su-tracking-wide:    0.06em;
-  --su-tracking-max:     0.14em;
-
-  /* Radius */
-  --su-radius:        4px;
-  --su-radius-lg:     10px;
-  --su-radius-suytex: 16px;  /* signature rounding */
-
-  /* Shadow */
-  --su-shadow-card: 0 2px 24px rgba(0,0,0,0.32), 0 0 0 1px rgba(255,255,255,0.04);
-
-  /* Spacing */
-  --su-gap: 1.5rem;
-
-  /* Transitions */
-  --su-ease: cubic-bezier(0.25, 0, 0, 1);
-  --su-duration: 200ms;
+  --su-hairline: 1px solid var(--su-blue);
+  --su-border:   1px solid rgba(148, 163, 184, 0.12);
+  --su-icon-stroke: 1.5px;
+  --su-radius:   4px;
 }
 
-/* ── 2. TAILWIND @THEME UTILITIES ───────────────────────────── */
-/*    Works when imported after @import "tailwindcss"           */
-
-@layer utilities {
-
-  /* Backgrounds */
-  .bg-brand { background-color: var(--su-brand); }
-  .bg-ink   { background-color: var(--su-ink);   }
-
-  /* Text colors */
-  .text-blue      { color: var(--su-blue);      }
-  .text-highlight { color: var(--su-highlight); }
-  .text-mist      { color: var(--su-mist);      }
-
-  /* Border */
-  .border-mist { border-color: var(--su-mist); }
-
-  /* Font families */
-  .font-display { font-family: var(--su-font-display); }
-  .font-body    { font-family: var(--su-font-body);    }
-
-  /* Letter spacing */
-  .tracking-title  { letter-spacing: var(--su-tracking-title);  }
-  .tracking-snug   { letter-spacing: var(--su-tracking-snug);   }
-  .tracking-normal { letter-spacing: var(--su-tracking-normal); }
-  .tracking-wide   { letter-spacing: var(--su-tracking-wide);   }
-  .tracking-max    { letter-spacing: var(--su-tracking-max);    }
-
-  /* Radius */
-  .rounded-suytex { border-radius: var(--su-radius-suytex); }
-}
-
-/* ── 3. RESETS & BASE ───────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family:      var(--su-font-body);
-  background-color: var(--su-ink);
-  color:            var(--su-white);
-  -webkit-font-smoothing: antialiased;
-  text-rendering:   optimizeLegibility;
-}
-
-/* ── 4. TYPOGRAPHY SCALE ────────────────────────────────────── */
-
-/* Caption — all-caps label, wide tracking */
 .su-caption {
-  font-family:    var(--su-font-body);
-  font-size:      0.6875rem;       /* 11px */
-  font-weight:    600;
-  line-height:    1;
-  letter-spacing: var(--su-tracking-max);
-  text-transform: uppercase;
-  color:          var(--su-gray-400);
+  font-family: var(--su-font-body);
+  font-size: 12px; line-height: 1; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.30em;
+  color: var(--su-highlight);
 }
-
-/* Title — display headline */
 .su-title {
-  font-family:    var(--su-font-display);
-  font-size:      clamp(2rem, 5vw, 4.5rem);
-  font-weight:    700;
-  line-height:    1.06;
-  letter-spacing: var(--su-tracking-title);
-  color:          var(--su-white);
+  font-family: var(--su-font-display); font-weight: 600;
+  text-transform: uppercase; letter-spacing: var(--tracking-title, 0.04em);
+  color: var(--su-white); line-height: 1.08;
 }
-
-/* Body — readable prose */
 .su-body {
-  font-family:    var(--su-font-body);
-  font-size:      1rem;
-  font-weight:    400;
-  line-height:    1.65;
-  letter-spacing: var(--su-tracking-snug);
-  color:          var(--su-gray-400);
+  font-family: var(--su-font-body); font-weight: 300;
+  line-height: 1.75; color: var(--su-mist);
 }
-
-/* ── 5. GRADIENT — EL ÚNICO GESTO ──────────────────────────── */
-
-/* Gradient text — one per composition, never stacked */
 .su-gradient-text {
-  background:                var(--su-gradient);
-  -webkit-background-clip:   text;
-  -webkit-text-fill-color:   transparent;
-  background-clip:           text;
-  color:                     transparent;  /* fallback */
-  display:                   inline;
-}
-
-/* ── 6. DIVIDERS ────────────────────────────────────────────── */
-
-/* Hairline — 1 px tinted separator */
-.su-hairline {
-  height:           1px;
-  background-color: var(--su-mist);
-  border:           none;
-  margin-block:     var(--su-gap);
-}
-
-/* Rule — gradient accent line */
-.su-rule {
-  height:     2px;
   background: var(--su-gradient);
-  border:     none;
-  width:      3rem;
-  margin-block: var(--su-gap);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
 }
-
-/* ── 7. SURFACE & CARD ──────────────────────────────────────── */
-
-/* Surface — flat container, first layer */
-.su-surface {
-  background-color: var(--su-brand);
-  border-radius:    var(--su-radius-suytex);
-  padding:          var(--su-gap);
-}
-
-/* Card — elevated container with subtle border */
-.su-card {
-  background-color: var(--su-brand);
-  border:           1px solid var(--su-mist);
-  border-radius:    var(--su-radius-suytex);
-  box-shadow:       var(--su-shadow-card);
-  padding:          var(--su-gap);
-  transition:       box-shadow var(--su-duration) var(--su-ease),
-                    border-color var(--su-duration) var(--su-ease);
-}
-
-.su-card:hover {
-  border-color: rgba(255,255,255,0.15);
-  box-shadow:   0 4px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(255,255,255,0.06);
-}
-
-/* ── 8. ICON ────────────────────────────────────────────────── */
-
-/* Icon container — consistent 40 × 40 slot */
+.su-hairline { border: none; height: 1px; background: var(--su-blue); opacity: 0.9; }
+.su-rule     { border: none; height: 1px; background: rgba(148, 163, 184, 0.12); }
+.su-card     { background: var(--su-brand); border: var(--su-border); border-radius: var(--su-radius); }
 .su-icon {
-  display:         inline-flex;
-  align-items:     center;
-  justify-content: center;
-  width:           2.5rem;
-  height:          2.5rem;
-  border-radius:   var(--su-radius);
-  background-color: var(--su-gray-600);
-  flex-shrink:     0;
+  width: 24px; height: 24px; fill: none;
+  stroke: var(--su-blue); stroke-width: var(--su-icon-stroke);
+  stroke-linecap: round; stroke-linejoin: round;
 }
-
-/* ── 9. FOCUS / A11Y ────────────────────────────────────────── */
-:focus-visible {
-  outline:        2px solid var(--su-blue);
-  outline-offset: 3px;
+.su-surface {
+  background: var(--su-brand); color: var(--su-white);
+  font-family: var(--su-font-body); font-weight: 300; line-height: 1.75;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

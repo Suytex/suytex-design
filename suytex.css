@@ -1,0 +1,199 @@
+/* ============================================================
+   SUYTEX DESIGN SYSTEM — suytex.css  v1.0.0
+   Tokens · Tailwind utilities · Signature classes
+   ============================================================ */
+
+/* ── 1. TOKENS ──────────────────────────────────────────────── */
+:root {
+  /* Color */
+  --su-brand:      #0A0A0F;        /* near-black, the canvas */
+  --su-ink:        #111117;        /* deep ink, text/bg */
+  --su-blue:       #3D6FFF;        /* accent — never fill */
+  --su-highlight:  #C8FF00;        /* electric lime, punch */
+  --su-mist:       rgba(255,255,255,0.10); /* subtle separator */
+  --su-white:      #FFFFFF;
+  --su-gray-50:    #F5F5F7;
+  --su-gray-400:   #8E8E99;
+  --su-gray-600:   #3A3A46;
+
+  /* Gradient — the one gesture */
+  --su-gradient:   linear-gradient(135deg, #3D6FFF 0%, #C8FF00 100%);
+
+  /* Typography */
+  --su-font-display: "Inter", "SF Pro Display", system-ui, sans-serif;
+  --su-font-body:    "Inter", "SF Pro Text", system-ui, sans-serif;
+
+  /* Tracking */
+  --su-tracking-title:  -0.03em;
+  --su-tracking-snug:   -0.02em;
+  --su-tracking-normal:  0em;
+  --su-tracking-wide:    0.06em;
+  --su-tracking-max:     0.14em;
+
+  /* Radius */
+  --su-radius:        4px;
+  --su-radius-lg:     10px;
+  --su-radius-suytex: 16px;  /* signature rounding */
+
+  /* Shadow */
+  --su-shadow-card: 0 2px 24px rgba(0,0,0,0.32), 0 0 0 1px rgba(255,255,255,0.04);
+
+  /* Spacing */
+  --su-gap: 1.5rem;
+
+  /* Transitions */
+  --su-ease: cubic-bezier(0.25, 0, 0, 1);
+  --su-duration: 200ms;
+}
+
+/* ── 2. TAILWIND @THEME UTILITIES ───────────────────────────── */
+/*    Works when imported after @import "tailwindcss"           */
+
+@layer utilities {
+
+  /* Backgrounds */
+  .bg-brand { background-color: var(--su-brand); }
+  .bg-ink   { background-color: var(--su-ink);   }
+
+  /* Text colors */
+  .text-blue      { color: var(--su-blue);      }
+  .text-highlight { color: var(--su-highlight); }
+  .text-mist      { color: var(--su-mist);      }
+
+  /* Border */
+  .border-mist { border-color: var(--su-mist); }
+
+  /* Font families */
+  .font-display { font-family: var(--su-font-display); }
+  .font-body    { font-family: var(--su-font-body);    }
+
+  /* Letter spacing */
+  .tracking-title  { letter-spacing: var(--su-tracking-title);  }
+  .tracking-snug   { letter-spacing: var(--su-tracking-snug);   }
+  .tracking-normal { letter-spacing: var(--su-tracking-normal); }
+  .tracking-wide   { letter-spacing: var(--su-tracking-wide);   }
+  .tracking-max    { letter-spacing: var(--su-tracking-max);    }
+
+  /* Radius */
+  .rounded-suytex { border-radius: var(--su-radius-suytex); }
+}
+
+/* ── 3. RESETS & BASE ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family:      var(--su-font-body);
+  background-color: var(--su-ink);
+  color:            var(--su-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering:   optimizeLegibility;
+}
+
+/* ── 4. TYPOGRAPHY SCALE ────────────────────────────────────── */
+
+/* Caption — all-caps label, wide tracking */
+.su-caption {
+  font-family:    var(--su-font-body);
+  font-size:      0.6875rem;       /* 11px */
+  font-weight:    600;
+  line-height:    1;
+  letter-spacing: var(--su-tracking-max);
+  text-transform: uppercase;
+  color:          var(--su-gray-400);
+}
+
+/* Title — display headline */
+.su-title {
+  font-family:    var(--su-font-display);
+  font-size:      clamp(2rem, 5vw, 4.5rem);
+  font-weight:    700;
+  line-height:    1.06;
+  letter-spacing: var(--su-tracking-title);
+  color:          var(--su-white);
+}
+
+/* Body — readable prose */
+.su-body {
+  font-family:    var(--su-font-body);
+  font-size:      1rem;
+  font-weight:    400;
+  line-height:    1.65;
+  letter-spacing: var(--su-tracking-snug);
+  color:          var(--su-gray-400);
+}
+
+/* ── 5. GRADIENT — EL ÚNICO GESTO ──────────────────────────── */
+
+/* Gradient text — one per composition, never stacked */
+.su-gradient-text {
+  background:                var(--su-gradient);
+  -webkit-background-clip:   text;
+  -webkit-text-fill-color:   transparent;
+  background-clip:           text;
+  color:                     transparent;  /* fallback */
+  display:                   inline;
+}
+
+/* ── 6. DIVIDERS ────────────────────────────────────────────── */
+
+/* Hairline — 1 px tinted separator */
+.su-hairline {
+  height:           1px;
+  background-color: var(--su-mist);
+  border:           none;
+  margin-block:     var(--su-gap);
+}
+
+/* Rule — gradient accent line */
+.su-rule {
+  height:     2px;
+  background: var(--su-gradient);
+  border:     none;
+  width:      3rem;
+  margin-block: var(--su-gap);
+}
+
+/* ── 7. SURFACE & CARD ──────────────────────────────────────── */
+
+/* Surface — flat container, first layer */
+.su-surface {
+  background-color: var(--su-brand);
+  border-radius:    var(--su-radius-suytex);
+  padding:          var(--su-gap);
+}
+
+/* Card — elevated container with subtle border */
+.su-card {
+  background-color: var(--su-brand);
+  border:           1px solid var(--su-mist);
+  border-radius:    var(--su-radius-suytex);
+  box-shadow:       var(--su-shadow-card);
+  padding:          var(--su-gap);
+  transition:       box-shadow var(--su-duration) var(--su-ease),
+                    border-color var(--su-duration) var(--su-ease);
+}
+
+.su-card:hover {
+  border-color: rgba(255,255,255,0.15);
+  box-shadow:   0 4px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+/* ── 8. ICON ────────────────────────────────────────────────── */
+
+/* Icon container — consistent 40 × 40 slot */
+.su-icon {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  width:           2.5rem;
+  height:          2.5rem;
+  border-radius:   var(--su-radius);
+  background-color: var(--su-gray-600);
+  flex-shrink:     0;
+}
+
+/* ── 9. FOCUS / A11Y ────────────────────────────────────────── */
+:focus-visible {
+  outline:        2px solid var(--su-blue);
+  outline-offset: 3px;
+}

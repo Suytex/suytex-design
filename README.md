@@ -181,11 +181,17 @@ de los dos):
   Ojo: `.su-icon` fija `width:24px;height:24px` por CSS, así que si vas a
   pedir un `size` distinto de 24 vía `suIcon(name, size)` o
   `data-su-icon-size`, no le pongas esa clase — te va a ganar el 24px fijo.
-- Para un tamaño custom con color propio, no uses `.su-icon`: cada símbolo
-  tiene `stroke="currentColor"`, así que basta con fijar `color` en el
-  `<svg>` o en un ancestro:
+- Para un tamaño custom con color propio, no uses `.su-icon` (te fijaría
+  `width:24px;height:24px`). **Ojo**: no alcanza con fijar solo `color`. El
+  `stroke="currentColor"` vive en el `<svg>` raíz del sprite, no en cada
+  símbolo — y no se hereda al `<use>` en otro punto del documento (ver
+  `ARCHITECTURE.md`, sección "Sistema de íconos", para el porqué exacto,
+  verificado con evidencia real). Sin `fill`/`stroke` explícitos en el
+  propio elemento o un ancestro, el ícono sale como silueta **negra
+  sólida**, no como el trazo esperado. Hay que declarar los tres:
   ```html
-  <span id="cta-icon" style="color: var(--su-accent-hover);"></span>
+  <span id="cta-icon" style="color: var(--su-accent-hover);
+    fill: none; stroke: currentColor; stroke-width: 1.5;"></span>
   <script>
     document.getElementById("cta-icon").innerHTML = suIcon("zap", 40);
   </script>

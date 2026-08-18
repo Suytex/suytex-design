@@ -53,12 +53,60 @@
     width: 90px; flex-shrink: 0;
     font-family: var(--su-font-body); font-size: 13px; color: var(--su-fg-subtle);
   }
-  .h1-sample { font-size: clamp(2.125rem, 5vw, 4rem); }
-  .h2-sample { font-size: clamp(1.75rem, 3.6vw, 2.75rem); }
-  .h3-sample { font-size: clamp(1.375rem, 2.4vw, 1.75rem); }
+  /* .su-title.* (no solo .*-sample): theme-light.css fija font-size en
+     [data-theme="light"] .su-title con especificidad 0,2,0 — hay que igualarla
+     para que estos tamaños de demo ganen. */
+  .su-title.h1-sample { font-size: clamp(2.125rem, 5vw, 4rem); }
+  .su-title.h2-sample { font-size: clamp(1.75rem, 3.6vw, 2.75rem); }
+  .su-title.h3-sample { font-size: clamp(1.375rem, 2.4vw, 1.75rem); }
   .card-icon {
     width: 24px; height: 24px; margin-bottom: 20px;
   }
+
+  /* -- comparativo dark / light -- */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  @media (max-width: 640px) {
+    .compare-grid { grid-template-columns: 1fr; }
+  }
+  .compare-label {
+    font-family: var(--su-font-body); font-size: 12px; letter-spacing: .05em;
+    color: var(--su-fg-subtle); margin: 0 0 12px;
+  }
+  .compare-frame {
+    width: 100%; height: 240px; display: block;
+    border: 1px solid var(--su-line-subtle);
+    border-radius: var(--su-radius-md);
+  }
+
+  /* -- escala de espaciado, aplicada de verdad -- */
+  .spacing-demo { position: relative; overflow: hidden; }
+  .spacing-band {
+    position: absolute; left: 0; right: 0; height: var(--su-section-y);
+    background: var(--su-accent-soft); pointer-events: none;
+  }
+  .spacing-band-top { top: 0; }
+  .spacing-band-bottom { bottom: 0; }
+  .spacing-band-label {
+    margin: 0; position: absolute; left: 24px; top: 50%;
+    transform: translateY(-50%);
+    font: 500 11px var(--su-font-body); letter-spacing: .08em;
+    text-transform: uppercase; color: var(--su-accent);
+  }
+  .spacing-bars { display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
+  .spacing-bar {
+    display: flex; align-items: center; justify-content: center;
+    width: 160px;
+    background: var(--su-surface); border: 1px solid var(--su-line-subtle);
+    border-radius: var(--su-radius-sm);
+    color: var(--su-fg-muted); font-family: var(--su-font-body); font-size: 12px;
+  }
+
+  .reading-block { max-width: 640px; }
 </style>
 </head>
 <body class="su-surface">
@@ -81,6 +129,45 @@
   </section>
 
   <hr class="su-hairline" style="max-width: 980px; margin: 0 auto;">
+
+  <section>
+    <div class="wrap">
+      <p class="su-caption">Contraste de dirección</p>
+      <h2 class="su-title h2-sample" style="margin: 16px 0 0;">Misma card, dos temas</h2>
+      <p class="su-body" style="margin-top: 16px; max-width: 620px;">
+        La izquierda es <code>suytex.css</code> puro, sin <code>data-theme</code>
+        — el estado por defecto que ven Yobel, Halving y Talvo. La derecha es
+        este mismo documento, con <code>data-theme="light"</code> en el
+        <code>&lt;html&gt;</code>.
+      </p>
+
+      <div class="compare-grid">
+        <div>
+          <p class="compare-label">DARK — sin data-theme (default de suytex.css)</p>
+          <iframe class="compare-frame" title="Card en tema dark, sin data-theme" srcdoc='
+            <!DOCTYPE html><html><head><meta charset="UTF-8">
+            <link rel="stylesheet" href="../suytex.css">
+            <style>html,body{margin:0;}body{padding:32px;}</style>
+            </head><body class="su-surface">
+              <div class="su-card" style="padding:32px;">
+                <svg class="su-icon" viewBox="0 0 24 24" style="margin-bottom:20px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                <h3 class="su-title" style="margin:0;font-size:28px;">Ritmo real</h3>
+                <p class="su-body" style="margin-top:12px;">Cohortes en vivo, sin relleno, con feedback directo de traders activos.</p>
+              </div>
+            </body></html>
+          '></iframe>
+        </div>
+        <div>
+          <p class="compare-label">LIGHT — data-theme="light" (este documento)</p>
+          <div class="su-card" style="padding: 32px; height: 240px; box-sizing: border-box;">
+            <svg class="su-icon" viewBox="0 0 24 24" style="margin-bottom: 20px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <h3 class="su-title" style="margin: 0; font-size: 28px;">Ritmo real</h3>
+            <p class="su-body" style="margin-top: 12px;">Cohortes en vivo, sin relleno, con feedback directo de traders activos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section style="background: var(--su-bg-alt);">
     <div class="wrap">
@@ -110,6 +197,47 @@
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="spacing-demo">
+    <div class="spacing-band spacing-band-top">
+      <p class="spacing-band-label">padding-top real = var(--su-section-y)</p>
+    </div>
+    <div class="spacing-band spacing-band-bottom">
+      <p class="spacing-band-label">padding-bottom real = var(--su-section-y)</p>
+    </div>
+    <div class="wrap">
+      <p class="su-caption">Escala de espaciado</p>
+      <h2 class="su-title h2-sample" style="margin: 16px 0 0;">96px / 64px, de verdad</h2>
+      <p class="su-body" style="margin-top: 16px; max-width: 620px;">
+        Las bandas resaltadas arriba y abajo de esta sección son el padding
+        real que aplica <code>var(--su-section-y)</code> a todo
+        <code>&lt;section&gt;</code> de este tema — no una descripción, el
+        espacio ocupado de verdad. Reducí la ventana por debajo de 768px para
+        verlo pasar de 96px a 64px en vivo.
+      </p>
+      <div class="spacing-bars">
+        <div class="spacing-bar" style="height: 96px;">96px — desktop</div>
+        <div class="spacing-bar" style="height: 64px;">64px — mobile (&lt;769px)</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reading-block">
+      <p class="su-caption">Legibilidad</p>
+      <h2 class="su-title h2-sample" style="margin: 16px 0 0;">Un párrafo real</h2>
+      <p class="su-body" style="margin-top: 24px; font-size: 17px;">
+        Suytex nació de una pregunta simple: por qué la educación financiera
+        de alto nivel sigue empaquetada en cursos genéricos, sin seguimiento
+        real ni nadie que responda cuando el mercado se mueve distinto al
+        manual. Construimos cohortes pequeñas, con mentores que operan todos
+        los días, y un currículo que se revisa cada trimestre contra
+        resultados reales, no contra la opinión de quien lo escribió. El
+        objetivo no es venderte un diploma: es que en seis meses defiendas
+        una tesis de trading frente a alguien que sabe más que vos.
+      </p>
     </div>
   </section>
 

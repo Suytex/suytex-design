@@ -27,6 +27,21 @@
   --su-fg:         #1D1D1F;
   --su-fg-muted:   #6E6E73;
   --su-fg-subtle:  #86868B;
+  /* GUIA DE USO — --su-fg-subtle vs --su-fg-muted (WCAG AA)
+     --su-fg-subtle NO cumple AA como color de texto pequeno: 3.62:1 sobre
+     --su-bg, 3.47:1 sobre --su-surface, 3.33:1 sobre --su-bg-alt — los tres
+     por debajo del minimo AA de 4.5:1. Uso valido de --su-fg-subtle:
+       - elementos NO textuales: bordes, iconos, dividers, placeholders de UI
+       - texto grande: >=18px/1.125rem regular, o >=24px/1.5rem (14pt) bold
+         (el minimo AA para texto grande es 3:1, ahi si cumple)
+     Para texto pequeno (footer, labels, estados de carga, captions, badges,
+     metadata) usar --su-fg-muted: 5.07:1 / 4.86:1 / 4.66:1 sobre los mismos
+     tres fondos — cumple AA en todos los casos.
+     Detectado en promo-ai y heredado por promo-portafolios: footer y estados
+     de carga con --su-fg-subtle a tamano de texto pequeno (3.33:1, bajo el
+     minimo). Las landings nuevas deben usar --su-fg-muted en esos contextos.
+     No se cambia el valor del token: romperia los usos validos (elementos
+     no textuales / texto grande) que dependen de este tono mas claro. */
 
   --su-accent:      #2563EB;
   --su-accent-hover:#1D4ED8;
@@ -83,8 +98,11 @@
   font-size: 12px; line-height: 1; font-weight: 500;
   text-transform: none;
   letter-spacing: 0.08em;
-  /* --su-fg-subtle (#86868B) da 3.62:1 sobre --su-bg: no llega a 4.5:1.
-     Se usa --su-fg-muted (5.07:1) para que el caption cumpla AA como texto. */
+  /* --su-fg-subtle da 3.62:1 sobre --su-bg (y menos aun sobre --su-surface/
+     --su-bg-alt): no llega al minimo AA de 4.5:1 para texto pequeno. Se usa
+     --su-fg-muted (5.07:1 sobre --su-bg) para que el caption cumpla AA como
+     texto. Guia completa de cuando usar cada uno: junto a la declaracion de
+     --su-fg-subtle, arriba. */
   color: var(--su-fg-muted);
 }
 

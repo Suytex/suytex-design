@@ -1,10 +1,13 @@
 {
   "name": "suytex-design",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Sistema de diseño de Suytex — tokens CSS para Tailwind v4 y vanilla.",
   "license": "UNLICENSED",
   "private": false,
-  "files": ["suytex.css"],
-  "exports": { "./suytex.css": "./suytex.css" },
+  "files": ["suytex.css", "theme-light.css"],
+  "exports": {
+    "./suytex.css": "./suytex.css",
+    "./theme-light.css": "./theme-light.css"
+  },
   "sideEffects": ["*.css"]
 }

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suytex — QA tema light</title>
+<link rel="stylesheet" href="../suytex.css">
+<link rel="stylesheet" href="../theme-light.css">
+<style>
+  /* Estilos de esta pagina de QA unicamente — no se publican, no forman
+     parte de theme-light.css. Usan los tokens del tema light por var(). */
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .wrap {
+    max-width: var(--su-maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  section { padding: var(--su-section-y) 0; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .btn-row { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 48px; padding: 0 28px;
+    font-family: var(--su-font-body); font-weight: 500; font-size: 15px;
+    border-radius: var(--su-radius-sm);
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--su-accent);
+    color: var(--su-on-accent);
+  }
+  .btn-primary:hover { background: var(--su-accent-hover); }
+  .btn-secondary {
+    background: var(--su-accent-soft);
+    color: var(--su-accent);
+    border-color: var(--su-line-subtle);
+  }
+  .btn-secondary:hover { border-color: var(--su-accent); }
+  .type-row {
+    display: flex; align-items: baseline; gap: 24px;
+    padding: 20px 0; border-bottom: 1px solid var(--su-line-subtle);
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-label {
+    width: 90px; flex-shrink: 0;
+    font-family: var(--su-font-body); font-size: 13px; color: var(--su-fg-subtle);
+  }
+  .h1-sample { font-size: clamp(2.125rem, 5vw, 4rem); }
+  .h2-sample { font-size: clamp(1.75rem, 3.6vw, 2.75rem); }
+  .h3-sample { font-size: clamp(1.375rem, 2.4vw, 1.75rem); }
+  .card-icon {
+    width: 24px; height: 24px; margin-bottom: 20px;
+  }
+</style>
+</head>
+<body class="su-surface">
+
+  <section>
+    <div class="wrap">
+      <p class="su-caption">Sistema de diseño · Suytex</p>
+      <h1 class="su-title" style="margin: 20px 0 0;">
+        Educación tech,<br>hecha con precisión
+      </h1>
+      <p class="su-body" style="max-width: 620px; margin-top: 28px; font-size: 19px;">
+        Un tema claro, aditivo, para landings — mismo acento, mismo tipo,
+        cero gradientes, cero glows. Aire de sobra.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#" onclick="return false;">Empezar ahora</a>
+        <a class="btn btn-secondary" href="#" onclick="return false;">Ver el programa</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="su-hairline" style="max-width: 980px; margin: 0 auto;">
+
+  <section style="background: var(--su-bg-alt);">
+    <div class="wrap">
+      <p class="su-caption">Por que Suytex</p>
+      <h2 class="su-title h2-sample" style="margin: 16px 0 0;">Tres razones</h2>
+
+      <div class="grid">
+        <div class="su-card" style="padding: 32px;">
+          <svg class="su-icon card-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <h3 class="su-title h3-sample" style="margin: 0;">Ritmo real</h3>
+          <p class="su-body" style="margin-top: 12px;">
+            Cohortes en vivo, sin relleno, con feedback directo de traders activos.
+          </p>
+        </div>
+        <div class="su-card" style="padding: 32px;">
+          <svg class="su-icon card-icon" viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M4 15l5-6 4 4 6-8"/></svg>
+          <h3 class="su-title h3-sample" style="margin: 0;">Datos, no opiniones</h3>
+          <p class="su-body" style="margin-top: 12px;">
+            Cada decisión de currículo se valida contra resultados medibles.
+          </p>
+        </div>
+        <div class="su-card" style="padding: 32px;">
+          <svg class="su-icon card-icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+          <h3 class="su-title h3-sample" style="margin: 0;">Comunidad activa</h3>
+          <p class="su-body" style="margin-top: 12px;">
+            Acceso directo a un grupo que sigue operando después del curso.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="su-caption">Escala tipografica</p>
+      <div style="margin-top: 24px;">
+        <div class="type-row">
+          <span class="type-label">H1 / su-title</span>
+          <span class="su-title h1-sample">Aa</span>
+        </div>
+        <div class="type-row">
+          <span class="type-label">H2 / su-title</span>
+          <span class="su-title h2-sample">Aa Suytex</span>
+        </div>
+        <div class="type-row">
+          <span class="type-label">H3 / su-title</span>
+          <span class="su-title h3-sample">Aa Suytex Academy</span>
+        </div>
+        <div class="type-row">
+          <span class="type-label">Body</span>
+          <span class="su-body" style="font-size: 17px;">
+            Texto de parrafo en Inter, pensado para lectura larga sin fatiga.
+          </span>
+        </div>
+        <div class="type-row">
+          <span class="type-label">Caption</span>
+          <span class="su-caption">Texto de apoyo en mayusculas suaves</span>
+        </div>
+        <div class="type-row">
+          <span class="type-label">Gradient</span>
+          <span class="su-title h3-sample su-gradient-text">Texto de acento</span>
+        </div>
+      </div>
+
+      <hr class="su-rule" style="margin-top: 48px;">
+
+      <p class="su-body" style="margin-top: 24px; font-size: 13px;">
+        Linea de arriba: <code>.su-rule</code>. Linea debajo del hero: <code>.su-hairline</code>.
+      </p>
+    </div>
+  </section>
+
+</body>
+</html>

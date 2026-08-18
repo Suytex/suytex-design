@@ -1,0 +1,140 @@
+/* ============================================================================
+   SUYTEX · TEMA LIGHT — capa aditiva para landings (promo-*, suytex-web)
+   ----------------------------------------------------------------------------
+   NO reemplaza ni redefine ningun token --su-* de suytex.css (son literales
+   de marca: --su-white = blanco, --su-brand = navy, y se usan fuera de las
+   clases .su-* en otros consumidores). Este archivo declara una capa
+   semantica NUEVA (roles: bg/fg/accent/line) con nombres propios, y solo
+   sobrescribe las 9 clases .su-* dentro del scope [data-theme="light"].
+
+   Sin data-theme="light" en el <html>, este archivo no altera nada:
+   todo selector aqui esta calificado por ese atributo.
+
+   Uso (landings vanilla, sin build):
+     <html data-theme="light">
+       <link rel="stylesheet" href=".../suytex.css">
+       <link rel="stylesheet" href=".../theme-light.css">
+
+   Las apps Yobel/Halving/Talvo son dark-only: NO deben poner data-theme="light".
+   ============================================================================ */
+
+[data-theme="light"] {
+  /* -- capa semantica: roles, no literales -- */
+  --su-bg:         #FFFFFF;
+  --su-bg-alt:     #F5F5F7;
+  --su-surface:    #FAFAFA;
+
+  --su-fg:         #1D1D1F;
+  --su-fg-muted:   #6E6E73;
+  --su-fg-subtle:  #86868B;
+
+  --su-accent:      #2563EB;
+  --su-accent-hover:#1D4ED8;
+  --su-accent-soft: #EFF6FF;
+  --su-on-accent:   #FFFFFF;
+
+  --su-line:        #D2D2D7;
+  --su-line-subtle: #E8E8ED;
+
+  --su-radius-sm: 8px;
+  --su-radius-md: 12px;
+  --su-radius-lg: 20px;
+
+  --su-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+
+  --su-maxw:        980px;
+  --su-section-y:   96px;
+
+  background: var(--su-bg);
+  color: var(--su-fg);
+}
+
+@media (max-width: 768px) {
+  [data-theme="light"] {
+    --su-section-y: 64px;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Overrides de las 9 clases .su-* (solo dentro del scope light)
+   ---------------------------------------------------------------------------- */
+
+[data-theme="light"] .su-title {
+  font-family: var(--su-font-display);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  color: var(--su-fg);
+  line-height: 1.08;
+  font-size: clamp(2.125rem, 5vw, 4rem);
+}
+
+[data-theme="light"] .su-body {
+  font-family: var(--su-font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--su-fg-muted);
+}
+
+[data-theme="light"] .su-caption {
+  font-family: var(--su-font-body);
+  font-size: 12px; line-height: 1; font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.08em;
+  /* --su-fg-subtle (#86868B) da 3.62:1 sobre --su-bg: no llega a 4.5:1.
+     Se usa --su-fg-muted (5.07:1) para que el caption cumpla AA como texto. */
+  color: var(--su-fg-muted);
+}
+
+[data-theme="light"] .su-gradient-text {
+  /* en light no se usa el gradiente oficial: color plano */
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  -webkit-text-fill-color: unset;
+  color: var(--su-fg);
+}
+
+[data-theme="light"] .su-hairline {
+  background: var(--su-accent);
+  opacity: 1;
+}
+
+[data-theme="light"] .su-rule {
+  /* en suytex.css esta clase trae rgba(148,163,184,.12) hardcodeado sin
+     var() (linea 78): no hay token que sobrescribir, hay que redeclarar
+     la regla completa. */
+  background: var(--su-line-subtle);
+}
+
+[data-theme="light"] .su-card {
+  background: var(--su-surface);
+  border: 1px solid var(--su-line-subtle);
+  border-radius: var(--su-radius-md);
+  box-shadow: none;
+}
+
+[data-theme="light"] .su-icon {
+  stroke: var(--su-accent);
+}
+
+[data-theme="light"] .su-surface {
+  background: var(--su-bg);
+  color: var(--su-fg);
+}
+
+/* ----------------------------------------------------------------------------
+   Accesibilidad
+   ---------------------------------------------------------------------------- */
+
+[data-theme="light"] :focus-visible {
+  outline: 2px solid var(--su-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="light"] * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

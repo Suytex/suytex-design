@@ -82,3 +82,38 @@ The files in this bundle are **design references created in HTML** — a prototy
 - Styling in the source is **100% inline** (no stylesheets/classes). When porting, convert to the target's idioms (CSS variables, Tailwind, styled-components, etc.) using the tokens above — do not copy inline styles verbatim into production.
 - Fonts load from Google Fonts; self-host in production if required.
 - The design is dark-first. Ensure `print-color-adjust: exact` equivalents if ever rendered to PDF.
+
+## Tema light (landings)
+
+`suytex.css` es dark-only y sus tokens `--su-*` son literales de marca
+(`--su-white` = blanco, `--su-brand` = navy), no roles semánticos. Para
+landings vanilla (`promo-*`, `suytex-web`) existe `theme-light.css`: una capa
+**aditiva** que no toca `suytex.css` ni redefine ninguno de sus tokens. Declara
+su propia capa semántica (`--su-bg`, `--su-fg`, `--su-accent`, etc.) y
+sobrescribe las 9 clases `.su-*` — todo bajo el scope `[data-theme="light"]`.
+
+**Activación** — cargar ambos archivos, en este orden, y marcar el `<html>`:
+
+```html
+<html data-theme="light">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Suytex/suytex-design@v1.1.0/suytex.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Suytex/suytex-design@v1.1.0/theme-light.css">
+```
+
+Vía npm (Tailwind v4 o bundler):
+
+```css
+@import "suytex-design/suytex.css";
+@import "suytex-design/theme-light.css";
+```
+
+Sin `data-theme="light"` en el `<html>`, `theme-light.css` no altera nada —
+todas sus reglas están calificadas por ese atributo.
+
+**Advertencia** — Yobel, Halving y Talvo son dark-only. Estas apps **no deben**
+poner `data-theme="light"` en ningún elemento; hacerlo activaría el tema claro
+sobre una interfaz que no fue diseñada para eso. `theme-light.css` es
+exclusivo de landings/marketing, no se referencia desde las apps.
+
+Ver `preview/light.html` para una página de QA visual con hero, sección
+alterna, cards, botones y escala tipográfica completa.

@@ -75,6 +75,7 @@
   font-weight: 400;
   line-height: 1.6;
   color: var(--su-fg-muted);
+  max-width: 68ch;
 }
 
 [data-theme="light"] .su-caption {

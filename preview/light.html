@@ -120,6 +120,24 @@
   /* max-width va en el parrafo, no en .wrap: si se aplica al wrap rompe
      el eje compartido de 980px porque hereda margin:auto y se centra solo */
   .reading-copy { max-width: 640px; }
+
+  /* -- catalogo de iconografia -- */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .icon-cell {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding: 24px 12px;
+    background: var(--su-surface); border: 1px solid var(--su-line-subtle);
+    border-radius: var(--su-radius-md);
+  }
+  .icon-name {
+    margin: 0; font-family: var(--su-font-body); font-size: 12px;
+    color: var(--su-fg-subtle); text-align: center;
+  }
 </style>
 </head>
 <body class="su-surface">
@@ -298,5 +316,47 @@
     </div>
   </section>
 
+  <section style="background: var(--su-bg-alt);">
+    <div class="wrap">
+      <p class="su-caption">Iconografía</p>
+      <h2 class="su-title h2-sample" style="margin: 16px 0 0;">24 íconos, un solo sprite</h2>
+      <p class="su-body" style="margin-top: 16px; max-width: 620px;">
+        <code>icons.js</code> — sprite SVG basado en Lucide (ISC), mismo grosor
+        de trazo (1.5px) que <code>--su-icon-stroke</code>. Reemplaza el uso de
+        emoji como iconografía en las landings. Cada celda usa
+        <code>class="su-icon" data-su-icon="nombre"</code> — el tamaño 24px y el
+        color <code>var(--su-accent)</code> vienen solos, de la clase
+        <code>.su-icon</code> que ya existe en <code>suytex.css</code>.
+      </p>
+      <div class="icon-grid">
+        <div class="icon-cell"><span class="su-icon" data-su-icon="alert-circle"></span><p class="icon-name">alert-circle</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="dice-5"></span><p class="icon-name">dice-5</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="help-circle"></span><p class="icon-name">help-circle</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="brain"></span><p class="icon-name">brain</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="layers"></span><p class="icon-name">layers</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="map"></span><p class="icon-name">map</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="search"></span><p class="icon-name">search</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="check-circle"></span><p class="icon-name">check-circle</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="bar-chart-3"></span><p class="icon-name">bar-chart-3</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="trending-up"></span><p class="icon-name">trending-up</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="wallet"></span><p class="icon-name">wallet</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="video"></span><p class="icon-name">video</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="users"></span><p class="icon-name">users</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="play-circle"></span><p class="icon-name">play-circle</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="message-circle"></span><p class="icon-name">message-circle</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="award"></span><p class="icon-name">award</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="clipboard-list"></span><p class="icon-name">clipboard-list</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="shield"></span><p class="icon-name">shield</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="zap"></span><p class="icon-name">zap</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="x-circle"></span><p class="icon-name">x-circle</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="smartphone"></span><p class="icon-name">smartphone</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="calendar"></span><p class="icon-name">calendar</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="clock"></span><p class="icon-name">clock</p></div>
+        <div class="icon-cell"><span class="su-icon" data-su-icon="target"></span><p class="icon-name">target</p></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../icons.js"></script>
 </body>
 </html>

@@ -117,3 +117,79 @@ exclusivo de landings/marketing, no se referencia desde las apps.
 
 Ver `preview/light.html` para una página de QA visual con hero, sección
 alterna, cards, botones y escala tipográfica completa.
+
+## Iconografía
+
+`icons.js` es un sprite SVG vanilla, sin dependencias ni build, para
+reemplazar el uso de emoji como iconografía en las landings
+(`promo-portafolios`, `promo-ai`, etc.). Es **aditivo**: no toca `suytex.css`
+ni `theme-light.css`, y no cambia el comportamiento de nada existente.
+
+24 íconos de [Lucide](https://lucide.dev) (licencia ISC — ver
+`LICENSE-lucide.txt`, que incluye también la atribución a Feather Icons de
+la que algunos íconos derivan): `alert-circle`, `dice-5`, `help-circle`,
+`brain`, `layers`, `map`, `search`, `check-circle`, `bar-chart-3`,
+`trending-up`, `wallet`, `video`, `users`, `play-circle`, `message-circle`,
+`award`, `clipboard-list`, `shield`, `zap`, `x-circle`, `smartphone`,
+`calendar`, `clock`, `target`.
+
+Al cargarse, `icons.js` inyecta un `<svg>` oculto (`aria-hidden="true"`,
+`display:none`) al inicio del `<body>` con un `<symbol id="su-{nombre}">`
+por ícono. No hace ningún `fetch()` — el sprite viaja embebido dentro del
+propio script — así que funciona igual por CDN jsDelivr o por ruta local,
+sin problemas de CORS.
+
+**Activación:**
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/Suytex/suytex-design@v1.2.0/icons.js"></script>
+```
+
+o localmente / vía npm:
+
+```html
+<script src="node_modules/suytex-design/icons.js"></script>
+```
+
+**Tres formas de uso:**
+
+1. Auto-render declarativo — el script rellena cualquier elemento con
+   `data-su-icon` al cargar:
+   ```html
+   <span data-su-icon="search"></span>
+   <span data-su-icon="search" data-su-icon-size="32"></span>
+   ```
+2. Helper JS — para insertar un ícono desde código:
+   ```js
+   el.innerHTML = suIcon("search");      // 24px
+   el.innerHTML = suIcon("search", 32);  // tamaño custom
+   ```
+3. `<use>` directo — si el sprite ya está inyectado en la página:
+   ```html
+   <svg width="24" height="24"><use href="#su-search"></use></svg>
+   ```
+
+**Tamaño y color, desde el consumidor** (el sprite nunca hardcodea ninguno
+de los dos):
+
+- Para el tamaño/color de marca por defecto (24px, `var(--su-blue)` en dark
+  o `var(--su-accent)` en light), agregá la clase `.su-icon` que **ya existe
+  en `suytex.css`** — no se redefine acá — al `<svg>` o al contenedor:
+  ```html
+  <span class="su-icon" data-su-icon="search"></span>
+  ```
+  Ojo: `.su-icon` fija `width:24px;height:24px` por CSS, así que si vas a
+  pedir un `size` distinto de 24 vía `suIcon(name, size)` o
+  `data-su-icon-size`, no le pongas esa clase — te va a ganar el 24px fijo.
+- Para un tamaño custom con color propio, no uses `.su-icon`: cada símbolo
+  tiene `stroke="currentColor"`, así que basta con fijar `color` en el
+  `<svg>` o en un ancestro:
+  ```html
+  <span id="cta-icon" style="color: var(--su-accent-hover);"></span>
+  <script>
+    document.getElementById("cta-icon").innerHTML = suIcon("zap", 40);
+  </script>
+  ```
+
+Ver `preview/light.html`, sección "Iconografía", para el catálogo visual
+completo de los 24 íconos.

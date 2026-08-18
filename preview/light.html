@@ -20,6 +20,7 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    align-items: stretch;
     gap: 24px;
     margin-top: 48px;
   }
@@ -28,7 +29,7 @@
     display: inline-flex; align-items: center; justify-content: center;
     height: 48px; padding: 0 28px;
     font-family: var(--su-font-body); font-weight: 500; font-size: 15px;
-    border-radius: var(--su-radius-sm);
+    border-radius: var(--su-radius-pill);
     cursor: pointer;
     border: 1px solid transparent;
     text-decoration: none;
@@ -39,11 +40,11 @@
   }
   .btn-primary:hover { background: var(--su-accent-hover); }
   .btn-secondary {
-    background: var(--su-accent-soft);
+    background: transparent;
     color: var(--su-accent);
-    border-color: var(--su-line-subtle);
+    border-color: var(--su-line);
   }
-  .btn-secondary:hover { border-color: var(--su-accent); }
+  .btn-secondary:hover { background: var(--su-accent-soft); }
   .type-row {
     display: flex; align-items: baseline; gap: 24px;
     padding: 20px 0; border-bottom: 1px solid var(--su-line-subtle);
@@ -56,9 +57,11 @@
   /* .su-title.* (no solo .*-sample): theme-light.css fija font-size en
      [data-theme="light"] .su-title con especificidad 0,2,0 — hay que igualarla
      para que estos tamaños de demo ganen. */
-  .su-title.h1-sample { font-size: clamp(2.125rem, 5vw, 4rem); }
+  /* escala sincronizada con el tope de H1 en theme-light.css (3.5rem);
+     progresion H1 56px -> H2 44px (x1.27) -> H3 34px (x1.29) */
+  .su-title.h1-sample { font-size: clamp(2.125rem, 5vw, 3.5rem); }
   .su-title.h2-sample { font-size: clamp(1.75rem, 3.6vw, 2.75rem); }
-  .su-title.h3-sample { font-size: clamp(1.375rem, 2.4vw, 1.75rem); }
+  .su-title.h3-sample { font-size: clamp(1.375rem, 2.4vw, 2.125rem); }
   .card-icon {
     width: 24px; height: 24px; margin-bottom: 20px;
   }
@@ -83,22 +86,30 @@
     border-radius: var(--su-radius-md);
   }
 
-  /* -- escala de espaciado, aplicada de verdad -- */
-  .spacing-demo { position: relative; overflow: hidden; }
-  .spacing-band {
+  /* -- andamiaje de QA del preview, NO forma parte del tema:
+     marca el padding real de seccion. Prefijo preview- a proposito, para
+     que quede claro que esto no es un patron de theme-light.css. -- */
+  .preview-spacing-demo { position: relative; overflow: hidden; }
+  .preview-spacing-band {
     position: absolute; left: 0; right: 0; height: var(--su-section-y);
     background: var(--su-accent-soft); pointer-events: none;
   }
-  .spacing-band-top { top: 0; }
-  .spacing-band-bottom { bottom: 0; }
-  .spacing-band-label {
+  .preview-spacing-band-top { top: 0; }
+  .preview-spacing-band-bottom { bottom: 0; }
+  /* alinea el label al mismo eje que .wrap (980px, centrado) en vez de
+     pegarlo al borde del viewport, que es el ancho real de la banda */
+  .preview-spacing-band-inner {
+    max-width: var(--su-maxw); height: 100%; margin: 0 auto;
+    padding: 0 24px; position: relative;
+  }
+  .preview-spacing-band-label {
     margin: 0; position: absolute; left: 24px; top: 50%;
     transform: translateY(-50%);
     font: 500 11px var(--su-font-body); letter-spacing: .08em;
     text-transform: uppercase; color: var(--su-accent);
   }
-  .spacing-bars { display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
-  .spacing-bar {
+  .preview-spacing-bars { display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
+  .preview-spacing-bar {
     display: flex; align-items: center; justify-content: center;
     width: 160px;
     background: var(--su-surface); border: 1px solid var(--su-line-subtle);
@@ -106,7 +117,9 @@
     color: var(--su-fg-muted); font-family: var(--su-font-body); font-size: 12px;
   }
 
-  .reading-block { max-width: 640px; }
+  /* max-width va en el parrafo, no en .wrap: si se aplica al wrap rompe
+     el eje compartido de 980px porque hereda margin:auto y se centra solo */
+  .reading-copy { max-width: 640px; }
 </style>
 </head>
 <body class="su-surface">
@@ -175,21 +188,21 @@
       <h2 class="su-title h2-sample" style="margin: 16px 0 0;">Tres razones</h2>
 
       <div class="grid">
-        <div class="su-card" style="padding: 32px;">
+        <div class="su-card" style="padding: 32px; height: 100%; box-sizing: border-box;">
           <svg class="su-icon card-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           <h3 class="su-title h3-sample" style="margin: 0;">Ritmo real</h3>
           <p class="su-body" style="margin-top: 12px;">
             Cohortes en vivo, sin relleno, con feedback directo de traders activos.
           </p>
         </div>
-        <div class="su-card" style="padding: 32px;">
+        <div class="su-card" style="padding: 32px; height: 100%; box-sizing: border-box;">
           <svg class="su-icon card-icon" viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M4 15l5-6 4 4 6-8"/></svg>
           <h3 class="su-title h3-sample" style="margin: 0;">Datos, no opiniones</h3>
           <p class="su-body" style="margin-top: 12px;">
             Cada decisión de currículo se valida contra resultados medibles.
           </p>
         </div>
-        <div class="su-card" style="padding: 32px;">
+        <div class="su-card" style="padding: 32px; height: 100%; box-sizing: border-box;">
           <svg class="su-icon card-icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
           <h3 class="su-title h3-sample" style="margin: 0;">Comunidad activa</h3>
           <p class="su-body" style="margin-top: 12px;">
@@ -200,35 +213,39 @@
     </div>
   </section>
 
-  <section class="spacing-demo">
-    <div class="spacing-band spacing-band-top">
-      <p class="spacing-band-label">padding-top real = var(--su-section-y)</p>
+  <section class="preview-spacing-demo">
+    <div class="preview-spacing-band preview-spacing-band-top">
+      <div class="preview-spacing-band-inner">
+        <p class="preview-spacing-band-label">andamiaje de QA — padding-top real = var(--su-section-y)</p>
+      </div>
     </div>
-    <div class="spacing-band spacing-band-bottom">
-      <p class="spacing-band-label">padding-bottom real = var(--su-section-y)</p>
+    <div class="preview-spacing-band preview-spacing-band-bottom">
+      <div class="preview-spacing-band-inner">
+        <p class="preview-spacing-band-label">andamiaje de QA — padding-bottom real = var(--su-section-y)</p>
+      </div>
     </div>
     <div class="wrap">
       <p class="su-caption">Escala de espaciado</p>
       <h2 class="su-title h2-sample" style="margin: 16px 0 0;">96px / 64px, de verdad</h2>
       <p class="su-body" style="margin-top: 16px; max-width: 620px;">
-        Las bandas resaltadas arriba y abajo de esta sección son el padding
-        real que aplica <code>var(--su-section-y)</code> a todo
-        <code>&lt;section&gt;</code> de este tema — no una descripción, el
-        espacio ocupado de verdad. Reducí la ventana por debajo de 768px para
-        verlo pasar de 96px a 64px en vivo.
+        Las bandas azules son andamiaje de esta página de QA — no forman
+        parte de <code>theme-light.css</code> — y marcan el padding real que
+        aplica <code>var(--su-section-y)</code> a todo <code>&lt;section&gt;</code>
+        de este tema. Reducí la ventana por debajo de 768px para verlo pasar
+        de 96px a 64px en vivo.
       </p>
-      <div class="spacing-bars">
-        <div class="spacing-bar" style="height: 96px;">96px — desktop</div>
-        <div class="spacing-bar" style="height: 64px;">64px — mobile (&lt;769px)</div>
+      <div class="preview-spacing-bars">
+        <div class="preview-spacing-bar" style="height: 96px;">96px — desktop</div>
+        <div class="preview-spacing-bar" style="height: 64px;">64px — mobile (&lt;769px)</div>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="wrap reading-block">
+    <div class="wrap">
       <p class="su-caption">Legibilidad</p>
       <h2 class="su-title h2-sample" style="margin: 16px 0 0;">Un párrafo real</h2>
-      <p class="su-body" style="margin-top: 24px; font-size: 17px;">
+      <p class="su-body reading-copy" style="margin-top: 24px; font-size: 17px;">
         Suytex nació de una pregunta simple: por qué la educación financiera
         de alto nivel sigue empaquetada en cursos genéricos, sin seguimiento
         real ni nadie que responda cuando el mercado se mueve distinto al

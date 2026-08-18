@@ -39,6 +39,7 @@
   --su-radius-sm: 8px;
   --su-radius-md: 12px;
   --su-radius-lg: 20px;
+  --su-radius-pill: 980px;
 
   --su-shadow: 0 1px 2px rgba(0, 0, 0, .04);
 
@@ -66,7 +67,7 @@
   letter-spacing: -0.02em;
   color: var(--su-fg);
   line-height: 1.08;
-  font-size: clamp(2.125rem, 5vw, 4rem);
+  font-size: clamp(2.125rem, 5vw, 3.5rem);
 }
 
 [data-theme="light"] .su-body {
@@ -96,7 +97,9 @@
 }
 
 [data-theme="light"] .su-hairline {
-  background: var(--su-accent);
+  /* en light el azul queda reservado a CTA/links/iconos: separadores de
+     seccion usan la misma linea neutra que .su-rule */
+  background: var(--su-line-subtle);
   opacity: 1;
 }
 
